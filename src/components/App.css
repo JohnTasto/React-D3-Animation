@@ -1,0 +1,33 @@
+.dataset-selector .radio + .radio {
+  margin-top: 10px;
+}
+.dataset-selector .step-select__label {
+  color: #337ab7;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+.dataset-selector .step-select__label:hover {
+  color: #23527c;
+  text-decoration: underline;
+}
+.dataset-selector input[type="radio"]:checked + .step-select__label {
+  color: #fff;
+  background-color: #337ab7;
+}
+.dataset-selector input[type="radio"]:checked + .step-select__label:hover {
+  text-decoration: none;
+}
+
+svg .chart__axis-tick,
+svg .chart__axis-line {
+  stroke: darkgray;
+}
+svg .chart__axis-text,
+svg .chart__axis-text {
+  font-family: sans-serif;
+  font-size: 14px;
+}
+svg .chart__area-plot {
+  stroke: steelblue;
+  stroke-width: 3px;
+}
