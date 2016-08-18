@@ -3,7 +3,7 @@ import { datasetConstants } from './index'
 export default {
   changeIndex: (index) => {
     return dispatch => dispatch({
-      type: DatasetConstants.CHANGE_INDEX,
+      type: datasetConstants.CHANGE_INDEX,
       index,
     })
   }
