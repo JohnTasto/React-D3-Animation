@@ -11,11 +11,11 @@ export default class Bar extends React.Component {
   }
 
   render () {
-    const {fill, width, yScale, view, value} = this.props
+    const { fill, width, yScale, view, value } = this.props
     const y = yScale(value)
     const height = view[1] - y
     return (
-      <rect {...{width, height, fill, y}} />
+      <rect {...{ width, height, fill, y }} />
     )
   }
 }

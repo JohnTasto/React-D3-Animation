@@ -34,7 +34,7 @@ export default class HorizontalAxis extends React.Component {
       return (
         <g transform={transform} key={key}>
           <line
-              {...{y1, y2}}
+              {...{ y1, y2 }}
               className="chart__axis-tick chart__axis-tick--horizontal"
               x1={0}
               x2={0}
@@ -45,22 +45,24 @@ export default class HorizontalAxis extends React.Component {
               textAnchor={'middle'}
               x={0}
               y={0}
-          >{labelFn(tickValue)}</text>
+          >
+            {labelFn(tickValue)}
+          </text>
         </g>
       )
     })
   }
 
   render () {
-    const {scale, view, margins, labelFn, tickValues, orientation} = this.props
-    const [width, height] = view
+    const { scale, view, margins, labelFn, tickValues, orientation } = this.props
+    const [ width, height ] = view
     let yPos = height
     if (orientation === HorizontalAxis.orientation.TOP) {
       yPos = 0
     }
     const transform = `translate(0, ${yPos})`
     return (
-      <g {...{transform}}>
+      <g {...{ transform }}>
         <line
             className="chart__axis-line chart__axis-line--horizontal"
             x1={0}

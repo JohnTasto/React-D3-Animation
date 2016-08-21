@@ -35,7 +35,7 @@ export default class VerticalAxis extends React.Component {
       return (
         <g transform={transform} key={key}>
           <line
-              {...{x1, x2}}
+              {...{ x1, x2 }}
               className="chart__axis-tick chart__axis-tick--vertical"
               y1={0}
               y2={0}
@@ -46,14 +46,16 @@ export default class VerticalAxis extends React.Component {
               textAnchor={anchorPosition}
               x={textXPos}
               y={0}
-          >{labelFn(tickValue)}</text>
+          >
+            {labelFn(tickValue)}
+          </text>
         </g>
       )
     })
   }
 
   render () {
-    const {scale, view, margins, labelFn, tickValues, orientation} = this.props
+    const { scale, view, margins, labelFn, tickValues, orientation } = this.props
     let width = margins[3]
     let xPos = -width
     let x1 = width
@@ -65,9 +67,9 @@ export default class VerticalAxis extends React.Component {
     const x2 = x1
     const transform = `translate(${xPos}, 0)`
     return (
-      <g {...{transform}}>
+      <g transform={transform}>
         <line
-            {...{x1, x2}}
+            {...{ x1, x2 }}
             className="chart__axis-line chart__axis-line--vertical"
             y1={0}
             y2={view[1]}

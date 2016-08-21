@@ -8,12 +8,6 @@ export default class DatasetSelect extends React.Component {
     switchDataset: React.PropTypes.func.isRequired,
   }
 
-  onClick (datasetIndex) {
-    return () => {
-      this.props.switchDataset(datasetIndex)
-    }
-  }
-
   render () {
     return (
       <div>
@@ -21,20 +15,22 @@ export default class DatasetSelect extends React.Component {
           <div className="radio">
             <label>
               <input
-                  defaultChecked
-                  name="step-select"
-                  onClick={this.onClick(0)}
-                  type="radio"
-              /> <span className="step-select__label">{'Dataset A'}</span>
+                defaultChecked
+                name="step-select"
+                onClick={() => this.props.switchDataset(0)}
+                type="radio"
+              />
+              <span className="step-select__label">{'Dataset A'}</span>
             </label>
           </div>
           <div className="radio">
             <label>
               <input
-                  name="step-select"
-                  onClick={this.onClick(1)}
-                  type="radio"
-              /> <span className="step-select__label">{'Dataset B'}</span>
+                name="step-select"
+                onClick={() => this.props.switchDataset(1)}
+                type="radio"
+              />
+              <span className="step-select__label">{'Dataset B'}</span>
             </label>
           </div>
         </form>
