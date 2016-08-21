@@ -33,7 +33,7 @@ export default class VerticalAxis extends React.Component {
       }
       const transform = `translate(0, ${yPos})`
       return (
-        <g {...{transform, key}}>
+        <g transform={transform} key={key}>
           <line
               {...{x1, x2}}
               className="chart__axis-tick chart__axis-tick--vertical"

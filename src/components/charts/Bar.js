@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default class extends React.Component {
+export default class Bar extends React.Component {
   static propTypes = {
     fill: React.PropTypes.string.isRequired,
     value: React.PropTypes.number.isRequired,

@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default class extends React.Component {
+export default class DatasetSelect extends React.Component {
   static propTypes = {
     activeDatasetIndex: React.PropTypes.number.isRequired,
     datasets: React.PropTypes.array.isRequired,

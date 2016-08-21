@@ -1,10 +1,10 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux'
-import ReduxThunk from 'redux-thunk'
-import datasetSelectReducer from './datasetSelectReducer.js'
+import { combineReducers } from 'redux'
+import {routerReducer} from 'react-router-redux'
 
-export default initialState => {
-  const reducers = combineReducers({
-    datasetSelect: datasetSelectReducer
-  })
-  return createStore(reducers, initialState, applyMiddleware(ReduxThunk))
-}
+import datasetSelectReducer from './datasetSelectReducer'
+
+
+export default combineReducers({
+  datasetSelect: datasetSelectReducer,
+  routing: routerReducer,
+})

@@ -15,10 +15,10 @@ export default class BarSeries extends React.Component {
   }
 
   buildBars (data, view, margins, xScale, yScale) {
-    const step = xScale.step()
+    // const step = xScale.step()
     const width = xScale.bandwidth() - xScale.paddingInner()
     const fill = 'steelblue'
-    return xScale.domain().map((label) => {
+    return xScale.domain().map(label => {
       const value = data[label]
       const xPos = xScale(label)
       return (
@@ -30,8 +30,8 @@ export default class BarSeries extends React.Component {
   }
 
   render () {
-    const {margins, view, data, xScale, yScale, year} = this.props
-    const [width, height] = view
+    const {margins, view, data, xScale, yScale} = this.props
+    // const [width, height] = view
     xScale.paddingOuter(0.125)
     xScale.paddingInner(0.125)
     const transform = `translate(${xScale.paddingOuter()}, 0)`

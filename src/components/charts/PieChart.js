@@ -23,8 +23,8 @@ export default class PieChart extends React.Component {
       const dy = '0.35em'
       const textAnchor = 'middle'
       return (
-        <g {...{key}}>
-          <path {...{d, fill}}></path>
+        <g key={key}>
+          <path {...{d, fill}} />
           <text {...{transform, dy, textAnchor, stroke: 'none', fill: '#fff'}}>
             {labels[key]}
           </text>
@@ -33,7 +33,7 @@ export default class PieChart extends React.Component {
     })
   }
 
-  buildDataSeries (data, view, margins) {
+  buildDataSeries (data, view) {
     const transform = `translate(${view[0] / 2}, ${view[1] / 2})`
     const radius = Math.min.apply(null, view) / 2
     const innerRadius = radius * 0.125

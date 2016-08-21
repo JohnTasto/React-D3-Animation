@@ -22,7 +22,7 @@ export default (dataProp, transitionDuration = 300) => ComposedComponent => clas
         const interpolator = interpolateNumber(this.state[label], nextData[label])
         return {label, interpolator}
       })
-      const interpolator = interpolateNumber(this.state[`${dataProp}Value`], nextProps[dataProp])
+      const interpolator = interpolateNumber(this.state[`${dataProp}Value`], nextProps[dataProp]) // eslint-disable-line no-unused-vars
       return (t) => {
         const newState = interpolators.map(({label, interpolator}) => ({[label]: interpolator(t)})).reduce((prev, curr) => ({...prev, ...curr}), {})
         this.setState(newState)

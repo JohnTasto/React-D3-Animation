@@ -6,5 +6,5 @@ export default {
       type: datasetConstants.CHANGE_INDEX,
       index,
     })
-  }
+  },
 }

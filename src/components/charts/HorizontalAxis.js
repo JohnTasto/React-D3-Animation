@@ -32,7 +32,7 @@ export default class HorizontalAxis extends React.Component {
       }
       const transform = `translate(${xPos}, 0)`
       return (
-        <g {...{transform, key}}>
+        <g transform={transform} key={key}>
           <line
               {...{y1, y2}}
               className="chart__axis-tick chart__axis-tick--horizontal"
