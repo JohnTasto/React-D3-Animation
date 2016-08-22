@@ -1,7 +1,5 @@
 import React from 'react'
 
-import AnimatedScaleWrapper from './AnimatedScaleWrapper'
-
 
 export default class VerticalAxis extends React.Component {
   static propTypes = {
@@ -9,8 +7,8 @@ export default class VerticalAxis extends React.Component {
     orientation: React.PropTypes.string.isRequired,
     scale: React.PropTypes.func.isRequired,
     tickValues: React.PropTypes.array.isRequired,
-    margins: React.PropTypes.array.isRequired,
-    view: React.PropTypes.array.isRequired,
+    margin: React.PropTypes.object.isRequired,
+    size: React.PropTypes.object.isRequired,
   }
 
   static orientation = {
@@ -18,22 +16,24 @@ export default class VerticalAxis extends React.Component {
     RIGHT: 'horizontal-axis-right',
   }
 
-  buildTicks (tickValues, scale, labelFn, margins, view, orientation) {
+  buildTicks(tickValues, scale, labelFn, orientation, margin) {
     return tickValues.map((tickValue, key) => {
-      const tickLength = view[0] / 6
+      const tickLength = margin.top / 6
       const yPos = scale(tickValue)
-      let x2 = view[0]
-      let x1 = x2 - tickLength
-      let anchorPosition = 'end'
-      let textXPos = x1 - tickLength
+      let x1, x2, anchorPosition, textXPos
       if (orientation === VerticalAxis.orientation.RIGHT) {
         x1 = 0
         x2 = tickLength
         anchorPosition = 'start'
+        textXPos = x1 - tickLength
+      } else {
+        x2 = margin.top
+        x1 = x2 - tickLength
+        anchorPosition = 'end'
+        textXPos = x1 - tickLength
       }
-      const transform = `translate(0, ${yPos})`
       return (
-        <g transform={transform} key={key}>
+        <g transform={`translate(0, ${yPos})`} key={key}>
           <line
               {...{ x1, x2 }}
               className="chart__axis-tick chart__axis-tick--vertical"
@@ -55,29 +55,26 @@ export default class VerticalAxis extends React.Component {
   }
 
   render () {
-    const { scale, view, margins, labelFn, tickValues, orientation } = this.props
-    let width = margins[3]
+    const { scale, size, margin, labelFn, tickValues, orientation } = this.props
+    let width = margin.left
     let xPos = -width
     let x1 = width
     if (orientation === VerticalAxis.orientation.RIGHT) {
-      width = margins[1] // refactor, might be a bug here, haven't checked
-      xPos = view[0]
+      width = margin.right // refactor, might be a bug here, haven't checked
+      xPos = size.width
       x1 = 0
     }
     const x2 = x1
-    const transform = `translate(${xPos}, 0)`
     return (
-      <g transform={transform}>
+      <g transform={`translate(${xPos}, 0)`}>
         <line
             {...{ x1, x2 }}
             className="chart__axis-line chart__axis-line--vertical"
             y1={0}
-            y2={view[1]}
+            y2={size.height}
         />
-        {this.buildTicks(tickValues, scale, labelFn, orientation, margins)}
+        {this.buildTicks(tickValues, scale, labelFn, orientation, margin)}
       </g>
     )
   }
 }
-
-export const AnimatedVerticalAxis = AnimatedScaleWrapper(['scale'])(VerticalAxis)

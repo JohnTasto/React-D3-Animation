@@ -1,4 +1,4 @@
-import { range } from 'd3'
+import * as d3 from 'd3'
 import seedrandom from 'seedrandom'
 
 export const random = (() => {
@@ -17,8 +17,8 @@ export const normalDist = () => {
 export function generateData (populationSize, controlSize, doNormal = false) {
   const randomFn = doNormal ? normalDist : random
   const groups = ['alpha', 'bravo', 'charlie', 'delta', 'echo', 'foxtrot']
-  const baseData = range(populationSize).map(() => groups[Math.floor(randomFn() * groups.length)])
-  return baseData.concat(range(controlSize).map(() => 'golf'))
+  const baseData = d3.range(populationSize).map(() => groups[Math.floor(randomFn() * groups.length)])
+  return baseData.concat(d3.range(controlSize).map(() => 'golf'))
 }
 
 export function countEntries (entries) {

@@ -1,7 +1,5 @@
 import React from 'react'
 
-import AnimatedScaleWrapper from './AnimatedScaleWrapper'
-
 
 export default class HorizontalAxis extends React.Component {
   static propTypes = {
@@ -9,8 +7,8 @@ export default class HorizontalAxis extends React.Component {
     orientation: React.PropTypes.string.isRequired,
     scale: React.PropTypes.func.isRequired,
     tickValues: React.PropTypes.array.isRequired,
-    margins: React.PropTypes.array.isRequired,
-    view: React.PropTypes.array.isRequired,
+    margin: React.PropTypes.object.isRequired,
+    size: React.PropTypes.object.isRequired,
   }
 
   static orientation = {
@@ -18,21 +16,22 @@ export default class HorizontalAxis extends React.Component {
     TOP: 'horizontal-axis-top',
   }
 
-  buildTicks (tickValues, scale, labelFn, orientation, margins) {
+  buildTicks (tickValues, scale, labelFn, orientation, margin) {
     const bandWidth = scale.bandwidth()
     return tickValues.map((tickValue, key) => {
       const xPos = scale(tickValue) + bandWidth / 2
-      let tickLength = margins[1] / 6
-      let y2 = margins[1]
-      let y1 = y2 - tickLength
+      let tickLength, y1, y2
       if (orientation === HorizontalAxis.orientation.BOTTOM) {
-        tickLength = margins[3] / 6
+        tickLength = margin.left / 6
         y2 = tickLength
         y1 = 0
+      } else {
+        tickLength = margin.right / 6
+        y2 = margin.right
+        y1 = y2 - tickLength
       }
-      const transform = `translate(${xPos}, 0)`
       return (
-        <g transform={transform} key={key}>
+        <g transform={`translate(${xPos}, 0)`} key={key}>
           <line
               {...{ y1, y2 }}
               className="chart__axis-tick chart__axis-tick--horizontal"
@@ -54,26 +53,19 @@ export default class HorizontalAxis extends React.Component {
   }
 
   render () {
-    const { scale, view, margins, labelFn, tickValues, orientation } = this.props
-    const [ width, height ] = view
-    let yPos = height
-    if (orientation === HorizontalAxis.orientation.TOP) {
-      yPos = 0
-    }
-    const transform = `translate(0, ${yPos})`
+    const { scale, size, margin, labelFn, tickValues, orientation } = this.props
+    const yPos = (orientation === HorizontalAxis.orientation.TOP) ? 0 : size.height
     return (
-      <g {...{ transform }}>
+      <g transform={`translate(0, ${yPos})`}>
         <line
             className="chart__axis-line chart__axis-line--horizontal"
             x1={0}
             y1={0}
-            x2={width}
+            x2={size.width}
             y2={0}
         />
-        {this.buildTicks(tickValues, scale, labelFn, orientation, margins)}
+        {this.buildTicks(tickValues, scale, labelFn, orientation, margin)}
       </g>
     )
   }
 }
-
-export const AnimatedHorizontalAxis = AnimatedScaleWrapper(['scale'])(HorizontalAxis)

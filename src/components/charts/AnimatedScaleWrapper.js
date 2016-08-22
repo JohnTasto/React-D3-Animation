@@ -33,14 +33,14 @@ export default (scaleProps = [], transitionDuration = 300) => ComposedComponent 
       .ease(d3.easeLinear)
       .tween('attr.scale', () => {
         const interpolators = scaleProps.map(scaleProp => {
-          const [nextDomainMin, nextDomainMax] = nextProps[scaleProp].domain()
+          const [ nextDomainMin, nextDomainMax ] = nextProps[scaleProp].domain()
           const minInterpolator = d3.interpolateNumber(this.state[`${scaleProp}Min`], nextDomainMin)
           const maxInterpolator = d3.interpolateNumber(this.state[`${scaleProp}Max`], nextDomainMax)
           return { scaleProp, minInterpolator, maxInterpolator }
         })
-        return (t) => {
+        return t => {
           const newState = interpolators
-            .map(({scaleProp, minInterpolator, maxInterpolator}) => ({
+            .map(({ scaleProp, minInterpolator, maxInterpolator }) => ({
               [`${scaleProp}Min`]: minInterpolator(t),
               [`${scaleProp}Max`]: maxInterpolator(t),
             }))
